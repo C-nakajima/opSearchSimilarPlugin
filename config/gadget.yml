@@ -1,0 +1,6 @@
+searchSimilarGadget: # ガジェット名
+  caption:
+    ja_JP: "おすすめユーザ" # ガジェット名称(日本語)
+  description:
+    ja_JP: "同じコミュニティに所属しているユーザを表示します。" # ガジェット説明(日本語)
+  component: [searchSimilar, searchSimilarGadget] # [module名, component名]
