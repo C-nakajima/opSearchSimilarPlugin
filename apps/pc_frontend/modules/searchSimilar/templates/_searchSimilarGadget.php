@@ -1,1 +1,2 @@
-Hello, world.
+<?php
+echo $communitiesId;
