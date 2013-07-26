@@ -16,7 +16,8 @@ class searchSimilarComponents extends sfComponents
       ->select('member_id')
       ->Where('is_pre = ?', false)
       ->andWhereNotIn('member_id', $this->getUser()->getMember()->getId())
-      #->andWhereIn('community_id', $this->communitiesId)
+     #ここんところで$this->communitiesIdを取得したいがうまくいかない 
+     #->andWhereIn('community_id', $this->communitiesId)
       ->having('COUNT(id) >= 2')
       ->groupBy('member_id')
       ->orderBy('random()')
