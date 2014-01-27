@@ -14,12 +14,10 @@ class searchSimilarComponents extends sfComponents
     #自分が所属するコミュニティ2つ以上に所属するメンバーのメンバーIDをランダムに3件取得
     $this->similars =  Doctrine::getTable('CommunityMember')->createQuery()
       ->select('member_id')
-      ->Where('is_pre = ?', false)
+      ->andWhereIn('community_id', $this->communitiesId)
       ->andWhereNotIn('member_id', $this->getUser()->getMember()->getId())
-     #ここんところで$this->communitiesIdを取得したいがうまくいかない 
-     #->andWhereIn('community_id', $this->communitiesId)
-      ->having('COUNT(id) >= 2')
       ->groupBy('member_id')
+      ->having('COUNT(id) >= 2')
       ->orderBy('random()')
       ->limit(3)
       ->execute(array(), Doctrine::HYDRATE_NONE);
