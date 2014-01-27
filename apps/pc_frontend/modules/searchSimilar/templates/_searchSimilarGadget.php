@@ -1,3 +1,10 @@
+初期コミュニティのコミュニティID:
+<?php
+foreach ($defaultCommunitiesId as $value) {
+  echo $value . ',';
+}
+?>
+<br>
 検索したコミュニティのコミュニティID:
 <?php
 foreach ($communitiesId as $value) {
@@ -7,6 +14,6 @@ foreach ($communitiesId as $value) {
 <br>
 2つ以上の同じコミュニティに参加しているメンバーのメンバーID:
 <?php
-foreach ($similars as $value) {
-  echo $value[0] . ',';
+foreach ($similarsId as $value) {
+  echo $value . ',';
 }
