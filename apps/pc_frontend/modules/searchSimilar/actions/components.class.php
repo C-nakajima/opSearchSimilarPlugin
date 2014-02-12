@@ -9,10 +9,10 @@ class searchSimilarComponents extends sfComponents
       ->select('community_id')
       ->where('name = ?', 'is_default')
       ->andWhere('value = ?', true)
-      ->execute(array(), Doctrine::HYDRATE_NONE);
+      ->execute(array(), Doctrine::HYDRATE_ARRAY);
     $this->defaultCommunitiesId = array();
     foreach ($this->defaultCommunities as $value) {
-      $this->defaultCommunitiesId[] = $value[0];
+      $this->defaultCommunitiesId[] = $value['community_id'];
     }
     #自分の所属するコミュニティをランダムに5件取得
     $this->communities = Doctrine::getTable('CommunityMember')->createQuery()
@@ -22,10 +22,10 @@ class searchSimilarComponents extends sfComponents
       ->andWhereIn('member_id', $this->getUser()->getMember()->getId())
       ->orderBy('random()')
       ->limit(5)
-      ->execute(array(), Doctrine::HYDRATE_NONE);
+      ->execute(array(), Doctrine::HYDRATE_ARRAY);
     $this->communitiesId = array();
     foreach ($this->communities as $value) {
-      $this->communitiesId[] = $value[0];
+      $this->communitiesId[] = $value['community_id'];
     }
     #自分が所属するコミュニティ2つ以上に所属するメンバーのメンバーIDをランダムに3件取得
     $this->similars =  Doctrine::getTable('CommunityMember')->createQuery()
@@ -37,10 +37,10 @@ class searchSimilarComponents extends sfComponents
       ->having('COUNT(id) >= 2')
       ->orderBy('random()')
       ->limit(3)
-      ->execute(array(), Doctrine::HYDRATE_NONE);
+      ->execute(array(), Doctrine::HYDRATE_ARRAY);
     $this->similarsId = array();
     foreach ($this->similars as $value) {
-      $this->similarsId[] = $value[0];
+      $this->similarsId[] = $value['member_id'];
     }
   }
 }
