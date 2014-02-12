@@ -1,19 +1,13 @@
 初期コミュニティのコミュニティID:
 <?php
-foreach ($defaultCommunitiesId as $value) {
-  echo $value . ',';
-}
+print_r($defaultCommunities);
 ?>
 <br>
 検索したコミュニティのコミュニティID:
 <?php
-foreach ($communitiesId as $value) {
-  echo $value . ',';
-}
+print_r($communities)
 ?>
 <br>
 2つ以上の同じコミュニティに参加しているメンバーのメンバーID:
 <?php
-foreach ($similarsId as $value) {
-  echo $value . ',';
-}
+print_r($similars);
