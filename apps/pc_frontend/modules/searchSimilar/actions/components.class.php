@@ -24,7 +24,7 @@ class searchSimilarComponents extends sfComponents
       ->andWhereIn('member_id_to', $this->getUser()->getMember()->getId())
       ->execute(array(), Doctrine::HYDRATE_SINGLE_SCALAR);
     #((((初期コミュニティ以外の)&(自分が所属するコミュニティ))2つ以上に所属する)&(自分をアクセスブロックしていないメンバー))のメンバーIDをランダムに3件取得
-    $this->similars =  Doctrine::getTable('CommunityMember')->createQuery()
+    $this->similarsId =  Doctrine::getTable('CommunityMember')->createQuery()
       ->select('member_id')
       ->whereIn('community_id', $this->communities)
       ->andWhereNotIn('member_id', $this->getUser()->getMember()->getId())
@@ -35,5 +35,9 @@ class searchSimilarComponents extends sfComponents
       ->orderBy('random()')
       ->limit(3)
       ->execute(array(), Doctrine::HYDRATE_SINGLE_SCALAR);
+    $this->similarMembers = Doctrine_Collection::create('Member');
+    foreach ($this->similarsId as $value){
+      $this->similarMembers[] = Doctrine::getTable('Member')->find($value);
+    }
   }
 }
